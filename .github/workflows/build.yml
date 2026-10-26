@@ -94,6 +94,16 @@ jobs:
       shell: bash
       run: |
         cd build && ninja
+    - name: Upload Windows build
+      if: ${{ matrix.os == 'windows-latest' && matrix.build_type == 'RelWithDebInfo' && matrix.ui == 'gui' && matrix.scripting == 'lua' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: SpriteBuddie-Windows-x64
+        path: |
+          build/bin/spritebuddie.exe
+          build/bin/data/
+          build/bin/*.dll
+        if-no-files-found: error
     - name: Running C++ Tests
       shell: bash
       run: |
@@ -108,6 +118,6 @@ jobs:
         if [[ "${{ runner.os }}" == "Linux" ]] ; then
           export XVFB=xvfb-run
         fi
-        export ASEPRITE=$PWD/build/bin/aseprite
+        export ASEPRITE=$PWD/build/bin/spritebuddie
         cd tests
         $XVFB bash run-tests.sh
