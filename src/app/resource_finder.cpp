@@ -103,7 +103,7 @@ void ResourceFinder::includeDataDir(const char* filename)
 #else
 
   // $HOME/.config/aseprite/filename
-  std::snprintf(buf, sizeof(buf), "aseprite/data/%s", filename);
+  std::snprintf(buf, sizeof(buf), "spritebuddie/data/%s", filename);
   includeHomeConfigDir(buf);
 
   // $BINDIR/data/filename
@@ -111,7 +111,7 @@ void ResourceFinder::includeDataDir(const char* filename)
   includeBinDir(buf);
 
   // $BINDIR/../share/aseprite/data/filename (installed in /usr/ or /usr/local/)
-  std::snprintf(buf, sizeof(buf), "../share/aseprite/data/%s", filename);
+  std::snprintf(buf, sizeof(buf), "../share/spritebuddie/data/%s", filename);
   includeBinDir(buf);
 
 #endif
@@ -124,7 +124,7 @@ void ResourceFinder::includeHomeDir(const char* filename)
   // %AppData%/Aseprite/filename
   wchar_t* env = _wgetenv(L"AppData");
   if (env) {
-    std::string path = base::join_path(base::to_utf8(env), "Aseprite");
+    std::string path = base::join_path(base::to_utf8(env), "SpriteBuddie");
     path = base::join_path(path, filename);
     addPath(path);
     m_default = path;
@@ -200,7 +200,7 @@ void ResourceFinder::includeUserDir(const char* filename)
   #else // !__APPLE__
 
     // $HOME/.config/aseprite/filename
-    includeHomeConfigDir((std::string("aseprite/") + filename).c_str());
+    includeHomeConfigDir((std::string("spritebuddie/") + filename).c_str());
 
   #endif
   }
