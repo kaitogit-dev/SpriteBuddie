@@ -98,7 +98,7 @@ add_subdirectory(app)
 
 set(ORIGINAL_DATA_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin/data)
 if(ENABLE_ASEPRITE_EXE AND APPLE)
-  set(DATA_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin/Aseprite.app/Contents/Resources/data)
+  set(DATA_OUTPUT_DIR ${CMAKE_BINARY_DIR}/bin/SpriteBuddie.app/Contents/Resources/data)
 else()
   set(DATA_OUTPUT_DIR ${ORIGINAL_DATA_OUTPUT_DIR})
 endif()
@@ -198,6 +198,7 @@ if(ENABLE_ASEPRITE_EXE)
   add_executable(aseprite ${BUNDLE_PARAM}
     main/main.cpp
     ${main_resources})
+  set_target_properties(aseprite PROPERTIES OUTPUT_NAME "spritebuddie")
   if(LAF_BACKEND STREQUAL "skia")
     if(WIN32)
       set_target_properties(aseprite PROPERTIES WIN32_EXECUTABLE true)
@@ -206,6 +207,7 @@ if(ENABLE_ASEPRITE_EXE)
   set_target_properties(aseprite PROPERTIES LINK_FLAGS "${LAF_BACKEND_LINK_FLAGS}")
   if(APPLE)
     set_target_properties(aseprite PROPERTIES
+      OUTPUT_NAME "SpriteBuddie"
       MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_LIST_DIR}/main/osx/Info.plist")
 
     # As the output now is inside the Aseprite.app bundle, we generate
@@ -213,7 +215,7 @@ if(ENABLE_ASEPRITE_EXE)
     # binary inside the .app bundle.
     add_custom_command(
       TARGET aseprite POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_BINARY_DIR}/bin/Aseprite.app/Contents/MacOS/aseprite" "${CMAKE_BINARY_DIR}/bin/aseprite")
+      COMMAND ${CMAKE_COMMAND} -E create_symlink "${CMAKE_BINARY_DIR}/bin/SpriteBuddie.app/Contents/MacOS/SpriteBuddie" "${CMAKE_BINARY_DIR}/bin/spritebuddie")
 
     # Create a bin/data link to bin/Aseprite.app/Contents/Resources/data
     # so tests can load the data too (as tests aren't linked inside the

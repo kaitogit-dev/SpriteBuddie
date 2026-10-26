@@ -8,7 +8,7 @@
             <key>UTTypeIdentifier</key>
             <string>org.aseprite.Aseprite.sprite</string>
             <key>UTTypeDescription</key>
-            <string>Aseprite Sprite</string>
+            <string>SpriteBuddie Sprite</string>
             <key>UTTypeConformsTo</key>
             <array>
                 <string>public.image</string>
@@ -35,7 +35,7 @@
             <key>CFBundleTypeIconFile</key>
             <string>Document.icns</string>
             <key>CFBundleTypeName</key>
-            <string>Aseprite Sprite</string>
+            <string>SpriteBuddie Sprite</string>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>LSHandlerRank</key>
@@ -59,7 +59,7 @@
             <key>CFBundleTypeIconFile</key>
             <string>Document.icns</string>
             <key>CFBundleTypeName</key>
-            <string>Aseprite Sprite</string>
+            <string>SpriteBuddie Sprite</string>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
         </dict>
@@ -71,7 +71,7 @@
             <key>CFBundleTypeIconFile</key>
             <string>Extension.icns</string>
             <key>CFBundleTypeName</key>
-            <string>Aseprite Extension</string>
+            <string>SpriteBuddie Extension</string>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>LSHandlerRank</key>
@@ -79,13 +79,13 @@
         </dict>
     </array>
     <key>CFBundleDisplayName</key>
-    <string>Aseprite</string>
+    <string>SpriteBuddie</string>
     <key>CFBundleExecutable</key>
-    <string>aseprite</string>
+    <string>SpriteBuddie</string>
     <key>CFBundleIdentifier</key>
-    <string>org.aseprite.Aseprite</string>
+    <string>dev.kaitogit.spritebuddie</string>
     <key>CFBundleName</key>
-    <string>Aseprite</string>
+    <string>SpriteBuddie</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleInfoDictionaryVersion</key>
