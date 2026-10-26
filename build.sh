@@ -24,7 +24,7 @@ echo "======================= BUILD ASEPRITE HELPER ========================"
 pwd=$(pwd)
 if [[ ! -f "$pwd/EULA.txt" || ! -f "$pwd/.gitmodules" ]] ; then
     echo ""
-    echo "Run build script from the Aseprite directory"
+    echo "Run build script from the SpriteBuddie directory"
     exit 1
 fi
 
@@ -144,8 +144,8 @@ if [ ! -f "$pwd/.build/userkind" ] ; then
         echo ""
         echo "Select what kind of user you are (press U or D key and then Enter):"
         echo ""
-        echo "  [U]ser: give a try to Aseprite"
-        echo "  [D]eveloper: develop/modify Aseprite"
+        echo "  [U]ser: give a try to SpriteBuddie"
+        echo "  [D]eveloper: develop/modify SpriteBuddie"
         echo ""
         read -p "[U/D]? "
         REPLY=$(echo $REPLY | tr '[:upper:]' '[:lower:]')
@@ -216,7 +216,7 @@ if [ ! -f "$pwd/.build/builds_dir" ] ; then
         builds_dir="$pwd"
 
         echo ""
-        echo "We'll build Aseprite in $builds_dir/build directory"
+        echo "We'll build SpriteBuddie in $builds_dir/build directory"
     fi
     echo "$builds_dir" > "$pwd/.build/builds_dir"
 fi
@@ -474,7 +474,7 @@ if [ ! -f "$active_build_dir/ninja.build" ] ; then
         osx_deployment_target=
     fi
 
-    echo "Configuring Aseprite..."
+    echo "Configuring SpriteBuddie..."
     if ! cmake -B "$active_build_dir" -S "$source_dir" -G Ninja \
          -DCMAKE_BUILD_TYPE=$build_type \
          $osx_deployment_target \
@@ -488,18 +488,18 @@ if [ ! -f "$active_build_dir/ninja.build" ] ; then
 fi
 echo "============================== BUILDING =============================="
 if ! cmake --build "$active_build_dir" -- aseprite | tee -a "$pwd/.build/log" ; then
-    echo "Error building Aseprite."
+    echo "Error building SpriteBuddie."
     exit 1
 fi
 
 echo "================================ DONE ================================"
 if [ $is_win ] ; then exe=.exe ; else exe= ; fi
-echo "Run Aseprite with the following command:"
+echo "Run SpriteBuddie with the following command:"
 echo ""
-echo "  $active_build_dir/bin/aseprite$exe"
+echo "  $active_build_dir/bin/spritebuddie$exe"
 echo ""
 
 # Run Aseprite in --auto mode
 if [[ $auto && ! $norun ]] ; then
-    "$active_build_dir/bin/aseprite$exe"
+    "$active_build_dir/bin/spritebuddie$exe"
 fi
