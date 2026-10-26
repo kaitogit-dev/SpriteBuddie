@@ -94,6 +94,22 @@ jobs:
       shell: bash
       run: |
         cd build && ninja
+    - name: Bundle Windows runtime DLLs
+      if: ${{ matrix.os == 'windows-latest' && matrix.build_type == 'RelWithDebInfo' && matrix.ui == 'gui' && matrix.scripting == 'lua' }}
+      shell: pwsh
+      run: |
+        $crypto = Join-Path ${env:ProgramFiles} 'OpenSSL\\bin\\libcrypto-3-x64.dll'
+        if (-not (Test-Path $crypto)) { throw "Missing OpenSSL runtime: $crypto" }
+        Copy-Item $crypto build/bin/
+        $originalPath = $env:PATH
+        $env:PATH = "$env:SystemRoot\\System32;$env:SystemRoot"
+        try {
+          & ./build/bin/spritebuddie.exe --version
+          if ($LASTEXITCODE -ne 0) { throw "SpriteBuddie runtime verification failed" }
+        }
+        finally {
+          $env:PATH = $originalPath
+        }
     - name: Upload Windows build
       if: ${{ matrix.os == 'windows-latest' && matrix.build_type == 'RelWithDebInfo' && matrix.ui == 'gui' && matrix.scripting == 'lua' }}
       uses: actions/upload-artifact@v4
