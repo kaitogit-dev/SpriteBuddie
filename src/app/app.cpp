@@ -607,7 +607,7 @@ void App::run(const bool runGuiManager)
     }
 #if !LAF_SKIA
     else if (m_showCliOnlyWarning) {
-      std::printf("You have a CLI-only Aseprite version\n"
+      std::printf("You have a CLI-only SpriteBuddie version\n"
                   "To enable GUI support build with LAF_BACKEND=skia\n");
     }
 #endif
@@ -702,7 +702,7 @@ bool App::isPortable()
   static std::optional<bool> is_portable;
   if (!is_portable) {
     is_portable = base::is_file(
-      base::join_path(base::get_file_path(base::get_app_path()), "aseprite.ini"));
+      base::join_path(base::get_file_path(base::get_app_path()), "spritebuddie.ini"));
   }
   return *is_portable;
 }
