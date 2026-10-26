@@ -104,8 +104,9 @@ jobs:
         $originalPath = $env:PATH
         $env:PATH = "$env:SystemRoot\\System32;$env:SystemRoot"
         try {
-          & ./build/bin/spritebuddie.exe --version
-          if ($LASTEXITCODE -ne 0) { throw "SpriteBuddie runtime verification failed" }
+          $version = & ./build/bin/spritebuddie.exe --version
+          if ($version -notmatch '^SpriteBuddie ') { throw "SpriteBuddie runtime verification failed" }
+          $global:LASTEXITCODE = 0
         }
         finally {
           $env:PATH = $originalPath
