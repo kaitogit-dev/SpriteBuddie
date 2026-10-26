@@ -30,7 +30,7 @@ static void configure_shell_open(hkey& k)
 
   hkey ddeexec = open.create("ddeexec");
   ddeexec.string("", "[open(\"%1\")]");
-  ddeexec.create("application").string("", "Aseprite");
+  ddeexec.create("application").string("", "SpriteBuddie");
   ddeexec.create("topic").string("", "system");
 }
 
@@ -42,12 +42,12 @@ void associate_file_type_with_asepritefile_class(const std::string& extension)
     // HKEY_CLASSES_ROOT\.extension
 
     hkey k = hkcr.create(std::string(".") + extension);
-    if (k.string("") != "AsepriteFile")
-      k.string("", "AsepriteFile");
+    if (k.string("") != "SpriteBuddieFile")
+      k.string("", "SpriteBuddieFile");
 
     // HKEY_CLASSES_ROOT\AsepriteFile
 
-    k = hkcr.create("AsepriteFile");
+    k = hkcr.create("SpriteBuddieFile");
     hkey icon = k.create("DefaultIcon");
     icon.string("", fmt::format("{},1", base::get_app_path()));
 
@@ -67,11 +67,11 @@ void add_aseprite_to_open_with_file_type(const std::string& extension)
 
     // HKEY_CLASSES_ROOT\.extension
     hkey k = hkcr.create(fmt::format(".{}\\OpenWithProgids", extension));
-    k.string("IgaraStudio.Aseprite", "");
+    k.string("SpriteBuddie.File", "");
 
     // HKEY_CLASSES_ROOT\IgaraStudio.Aseprite
-    k = hkcr.create("IgaraStudio.Aseprite");
-    k.create("Application").string("ApplicationName", "Aseprite (running instance)");
+    k = hkcr.create("SpriteBuddie.File");
+    k.create("Application").string("ApplicationName", "SpriteBuddie (running instance)");
     configure_shell_open(k);
 
     notify_shell_about_association_change_regen_thumbnails();
